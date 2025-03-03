@@ -1,6 +1,7 @@
 import mysql.connector
 from db_connector import db_connection
 
+#Placeholder comment - Rudy
 def create_tables():
     conn = db_connection()
     cursor = conn.cursor()
