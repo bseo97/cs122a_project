@@ -14,6 +14,8 @@ Follow the step below to set environment variables.
 - 1, Run create_tables.py 
 - 2, Run import_data.py
 
+
+
 # ------------- Below is for log -------------
 ## March 3, 2025
 
@@ -21,7 +23,7 @@ Follow the step below to set environment variables.
 - Implemented basic project setup for db_connection, create_table, and import CSV file
 - Fixed db connector to environment variable for safe purpose
 
-# March 4, 2025
+## March 4, 2025
 
 ### Created md
 - Created README.md
