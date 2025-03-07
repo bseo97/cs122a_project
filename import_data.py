@@ -1,17 +1,16 @@
 import mysql.connector
 import os
 from db_connector import db_connection  # Import the function
-from delete_table import delete_existing_table
 from create_tables import create_tables
 
-def import_csv_data():
+def import_csv_data(fileName):
     """Loads CSV files into MySQL tables using Python."""
     try:
         
         conn = db_connection()  # Use the imported function
         cursor = conn.cursor()
 
-        test_data_folder = os.path.abspath("test_data")  # Ensure it's absolute
+        test_data_folder = os.path.abspath(fileName)  # Ensure it's absolute
         print(f"Using test data folder: {test_data_folder}")  # Debugging
 
         # dict of CSV files and corresponding tables
@@ -59,6 +58,3 @@ def import_csv_data():
     finally:
         cursor.close()
         conn.close()
-
-if __name__ == "__main__":
-    import_csv_data()

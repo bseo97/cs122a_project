@@ -120,9 +120,7 @@ def create_tables():
     conn.commit()
     cursor.close()
     conn.close()
-print("All tables created")
+    print("All tables created")
 
-if __name__ == "__main__":
-    create_tables()
 
 
