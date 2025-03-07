@@ -1,13 +1,15 @@
 import mysql.connector
 import os
 from db_connector import db_connection  # Import the function
+from delete_table import delete_existing_table
+from create_tables import create_tables
 
 def import_csv_data():
     """Loads CSV files into MySQL tables using Python."""
     try:
+        
         conn = db_connection()  # Use the imported function
         cursor = conn.cursor()
-
 
         test_data_folder = os.path.abspath("test_data")  # Ensure it's absolute
         print(f"Using test data folder: {test_data_folder}")  # Debugging
@@ -29,7 +31,9 @@ def import_csv_data():
             file_path = os.path.join(test_data_folder, file)       # to find all CSV files within main directory
             csv_path = os.path.abspath(file_path).replace("\\", "/")    #to correctly read test_data folder (python originally interprets \t as tab)
 
+            cursor.execute("SET foreign_key_checks=0") #Set key restraint to zero so that tables with key restraints can be deleted
             cursor.execute(f"TRUNCATE TABLE {table};")  # Delete existing records
+            cursor.execute("SET foreign_key_checks=1")# Put back on key restraints
 
             print(f"Loading: {csv_path}")
 

@@ -3,6 +3,8 @@ import os
 
 # Replace these with your MySQL credentials
 def db_connection():
+    print("USER:", os.getenv("DB_USER"))
+    print("PASSWORD:",os.getenv("DB_PASSWORD"))
     conn = mysql.connector.connect(
         host='localhost',
         user=os.getenv("DB_USER"),

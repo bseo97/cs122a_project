@@ -1,9 +1,9 @@
 import mysql.connector
 from db_connector import db_connection
 
-#Placeholder comment - Rudy
-def create_tables():
-    conn = db_connection()
+
+def create_tables(): 
+    conn = db_connection()  # Use the imported function
     cursor = conn.cursor()
 
     cursor.execute("USE cs122a;")   # Assumed that we already have cs122a database
