@@ -2,6 +2,7 @@ import sys
 from create_tables import create_tables
 from import_data import import_csv_data
 from insert_viewer import insert_viewer
+from add_genre import add_genre
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:
@@ -16,6 +17,11 @@ if __name__ == "__main__":
         create_tables()
         if(insert_viewer(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6], sys.argv[7], sys.argv[8], sys.argv[9], sys.argv[10], sys.argv[11], sys.argv[12], sys.argv[13])):
             print("Sucess")
+        else:
+            print("Fail")
+    elif sys.argv[1] == "addGenre" and len(sys.argv) == 4:
+        if(add_genre(sys.argv[2],sys.argv[3])):
+            print("Success")
         else:
             print("Fail")
     else:
