@@ -54,7 +54,8 @@ def import_csv_data(fileName):
 
     except mysql.connector.Error as err:
         print(f"Database error: {err}")
-
+        return False
     finally:
         cursor.close()
         conn.close()
+        return True
