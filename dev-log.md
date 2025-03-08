@@ -8,3 +8,4 @@ Implemented and set up insertViewer feature in project.py.
 
 3/8/2025
 Added addGenre feature
+Added deleteViewer feature

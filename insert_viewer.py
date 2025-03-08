@@ -17,6 +17,7 @@ def insert_viewer(uid:int, email:str, nickname:str, street:str, city:str, state:
         cursor.execute(insert_into_viewer_table)
     except mysql.connector.Error as err:
         print("FAILED TO EXECUTE INSERT VIEWER QUERIES")
+        print(err)
         return False
 
     conn.commit()
