@@ -12,3 +12,6 @@ Added deleteViewer feature
 
 3/9/2025
 Added insertMovie and insertSession feature
+
+3/14/2025
+Updated import_data.py so that it passes the test cases
