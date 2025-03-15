@@ -9,11 +9,18 @@ def add_genre(uid:int, genre:str):
         #Retrieve the value in genre table of user uid
         retreive_query = f"SELECT genres FROM users WHERE users.uid = {uid}"
         cursor.execute(retreive_query)
-        retreive_value = cursor.fetchall()[0][0]
-        print(retreive_value)
+        retreive_value = cursor.fetchall()
+        #If the same genre is in the string return false
+        if genre in retreive_value[0][0].split(";"):
+            return False
+        retreive_value = retreive_value[0][0]
+        # print(retreive_value)
 
-        #Append user input genre into genre string
-        retreive_value = f"{genre};" + retreive_value
+        #Append user input genre into genre string. If the string is 0 then leave out the semicolon else add it.
+        if len(retreive_value) == 0:
+            retreive_value = genre
+        else:
+            retreive_value = f"{retreive_value};" + genre
 
         #Update genre value in users with new genre string
         update_query = f"UPDATE users SET genres='{retreive_value}' WHERE users.uid = {uid}"
