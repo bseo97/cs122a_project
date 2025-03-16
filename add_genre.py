@@ -14,9 +14,8 @@ def add_genre(uid:int, genre:str):
         if genre in retreive_value[0][0].split(";"):
             return False
         retreive_value = retreive_value[0][0]
-        # print(retreive_value)
 
-        #Append user input genre into genre string. If the string is 0 then leave out the semicolon else add it.
+        #Append user input genre into genre string. If the string is empty then just add the genre into the string.
         if len(retreive_value) == 0:
             retreive_value = genre
         else:
@@ -26,7 +25,7 @@ def add_genre(uid:int, genre:str):
         update_query = f"UPDATE users SET genres='{retreive_value}' WHERE users.uid = {uid}"
         cursor.execute(update_query)
     except mysql.connector.Error as err:
-        print("Error with adding genre")
+        print("Error with adding genre: " + err)
         return False
 
     conn.commit()
