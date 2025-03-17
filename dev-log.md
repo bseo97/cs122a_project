@@ -20,3 +20,7 @@ Updated import_data.py so that it passes the test cases
 Added in update_releases to update the release.
 Removed print statements to pass the test cases.
 Implemented the first search query for get_releases. 
+
+3/17/2025
+Added search queries
+Finishing up implementation

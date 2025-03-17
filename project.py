@@ -8,6 +8,11 @@ from insert_movie import insert_movie
 from insert_session import insert_session
 from update_release import update_release
 from get_releases import get_releases
+from popular_release import popular_release
+from title_release import title_release
+from active_viewers import active_viewers
+from videos_viewed import videos_viewed
+
 if __name__ == "__main__":
     if len(sys.argv) == 1:
         print("NO COMMAND PASSED")
@@ -57,6 +62,26 @@ if __name__ == "__main__":
                 printString += (str(value) + ",")
             #Splice the string so that the last comma is not included
             print(printString[:len(printString) - 1])
+    elif sys.argv[1] == "popularRelease" and len(sys.argv) == 3:
+        results = popular_release(int(sys.argv[2]))
+        for values in results:
+            print(",".join(map(str, values)))  # Output in CSV format
+
+    elif sys.argv[1] == "releaseTitle" and len(sys.argv) == 3:
+        results = title_release(int(sys.argv[2]))
+        for values in results:
+            print(",".join(map(str, values)))  # Output in CSV format
+
+    elif sys.argv[1] == "activeViewer" and len(sys.argv) == 5:
+        results = active_viewers(int(sys.argv[2]), sys.argv[3], sys.argv[4])
+        for values in results:
+            print(",".join(map(str, values)))  # Output in CSV format
+
+    elif sys.argv[1] == "videosViewed" and len(sys.argv) == 3:
+        results = videos_viewed(int(sys.argv[2]))
+        for values in results:
+            print(",".join(map(str, values)))  # Output in CSV format
+
     else:
          print("Invalid Input")
-        
+
