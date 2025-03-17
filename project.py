@@ -7,6 +7,7 @@ from delete_viewer import delete_viewer
 from insert_movie import insert_movie
 from insert_session import insert_session
 from update_release import update_release
+from get_releases import get_releases
 if __name__ == "__main__":
     if len(sys.argv) == 1:
         print("NO COMMAND PASSED")
@@ -46,7 +47,16 @@ if __name__ == "__main__":
         if(update_release(sys.argv[2],sys.argv[3])):
             print("Success")
         else:
-            print("FAIL")
+            print("Fail")
+    elif sys.argv[1] == "listReleases" and len(sys.argv) == 3:
+        #Can change for a better way to join tuples if you want
+        for values in get_releases[sys.argv[2]]:
+            #Join the tuple into a string to print. Use format rid,genre,title
+            printString = ""
+            for value in values:
+                printString += (str(value) + ",")
+            #Splice the string so that the last comma is not included
+            print(printString[:len(printString) - 1])
     else:
          print("Invalid Input")
         
