@@ -15,3 +15,7 @@ Added insertMovie and insertSession feature
 
 3/14/2025
 Updated import_data.py so that it passes the test cases
+
+3/16/2025
+Added in update_releases to update the release.
+Removed print statements to pass the test cases.

@@ -6,6 +6,7 @@ from add_genre import add_genre
 from delete_viewer import delete_viewer
 from insert_movie import insert_movie
 from insert_session import insert_session
+from update_release import update_release
 if __name__ == "__main__":
     if len(sys.argv) == 1:
         print("NO COMMAND PASSED")
@@ -41,6 +42,11 @@ if __name__ == "__main__":
             print("Success")
         else:
             print("Fail")
+    elif sys.argv[1] == "updateRelease" and len(sys.argv) == 4:
+        if(update_release(sys.argv[2],sys.argv[3])):
+            print("Success")
+        else:
+            print("FAIL")
     else:
          print("Invalid Input")
         
