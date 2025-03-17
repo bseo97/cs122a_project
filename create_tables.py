@@ -1,16 +1,16 @@
 import mysql.connector
 from db_connector import db_connection
 
-#Placeholder comment - Rudy
-def create_tables():
-    conn = db_connection()
+
+def create_tables(): 
+    conn = db_connection()  # Use the imported function
     cursor = conn.cursor()
 
     cursor.execute("USE cs122a;")   # Assumed that we already have cs122a database
 
     create_table_queries = {
-        "Users": """
-                CREATE TABLE IF NOT EXISTS Users (
+        "users": """
+                CREATE TABLE IF NOT EXISTS users (
                     uid INT,
                     email TEXT NOT NULL,
                     joined_date DATE NOT NULL,
@@ -23,64 +23,64 @@ def create_tables():
                     PRIMARY KEY (uid)
                 );
             """,
-        "Producers": """
-                CREATE TABLE IF NOT EXISTS Producers (
+        "producers": """
+                CREATE TABLE IF NOT EXISTS producers (
                     uid INT,
                     bio TEXT,
                     company TEXT,
                     PRIMARY KEY (uid),
-                    FOREIGN KEY (uid) REFERENCES Users(uid) ON DELETE CASCADE
+                    FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE
                 );
             """,
-        "Viewers": """
-                CREATE TABLE IF NOT EXISTS Viewers (
+        "viewers": """
+                CREATE TABLE IF NOT EXISTS viewers (
                     uid INT,
                     subscription ENUM('free', 'monthly', 'yearly'),
                     first_name TEXT NOT NULL,
                     last_name TEXT NOT NULL,
                     PRIMARY KEY (uid),
-                    FOREIGN KEY (uid) REFERENCES Users(uid) ON DELETE CASCADE
+                    FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE
                 );
             """,
-        "Releases": """
-                CREATE TABLE IF NOT EXISTS Releases (
+        "releases": """
+                CREATE TABLE IF NOT EXISTS releases (
                     rid INT,
                     producer_uid INT NOT NULL,
                     title TEXT NOT NULL,
                     genre TEXT NOT NULL,
                     release_date DATE NOT NULL,
                     PRIMARY KEY (rid),
-                    FOREIGN KEY (producer_uid) REFERENCES Producers(uid) ON DELETE CASCADE
+                    FOREIGN KEY (producer_uid) REFERENCES producers(uid) ON DELETE CASCADE
                 );
             """,
-        "Movies": """
-                CREATE TABLE IF NOT EXISTS Movies (
+        "movies": """
+                CREATE TABLE IF NOT EXISTS movies (
                     rid INT,
                     website_url TEXT,
                     PRIMARY KEY (rid),
-                    FOREIGN KEY (rid) REFERENCES Releases(rid) ON DELETE CASCADE
+                    FOREIGN KEY (rid) REFERENCES releases(rid) ON DELETE CASCADE
                 );
             """,
-        "Series": """
-                CREATE TABLE IF NOT EXISTS Series (
+        "series": """
+                CREATE TABLE IF NOT EXISTS series (
                     rid INT,
                     introduction TEXT,
                     PRIMARY KEY (rid),
-                    FOREIGN KEY (rid) REFERENCES Releases(rid) ON DELETE CASCADE
+                    FOREIGN KEY (rid) REFERENCES releases(rid) ON DELETE CASCADE
                 );
             """,
-        "Videos": """
-                CREATE TABLE IF NOT EXISTS Videos (
+        "videos": """
+                CREATE TABLE IF NOT EXISTS videos (
                     rid INT,
                     ep_num INT NOT NULL,
                     title TEXT NOT NULL,
                     length INT NOT NULL,
                     PRIMARY KEY (rid, ep_num),
-                    FOREIGN KEY (rid) REFERENCES Releases(rid) ON DELETE CASCADE
+                    FOREIGN KEY (rid) REFERENCES releases(rid) ON DELETE CASCADE
                 );
             """,
-        "Sessions": """
-                CREATE TABLE IF NOT EXISTS Sessions (
+        "sessions": """
+                CREATE TABLE IF NOT EXISTS sessions (
                     sid INT,
                     uid INT NOT NULL,
                     rid INT NOT NULL,
@@ -90,12 +90,12 @@ def create_tables():
                     quality ENUM('480p', '720p', '1080p'),
                     device ENUM('mobile', 'desktop'),
                     PRIMARY KEY (sid),
-                    FOREIGN KEY (uid) REFERENCES Viewers(uid) ON DELETE CASCADE,
-                    FOREIGN KEY (rid, ep_num) REFERENCES Videos(rid, ep_num) ON DELETE CASCADE
+                    FOREIGN KEY (uid) REFERENCES viewers(uid) ON DELETE CASCADE,
+                    FOREIGN KEY (rid, ep_num) REFERENCES videos(rid, ep_num) ON DELETE CASCADE
                 );
             """,
-        "Reviews": """
-                CREATE TABLE IF NOT EXISTS Reviews (
+        "reviews": """
+                CREATE TABLE IF NOT EXISTS reviews (
                     rvid INT,
                     uid INT NOT NULL,
                     rid INT NOT NULL,
@@ -103,8 +103,8 @@ def create_tables():
                     body TEXT,
                     posted_at DATETIME NOT NULL,
                     PRIMARY KEY (rvid),
-                    FOREIGN KEY (uid) REFERENCES Viewers(uid) ON DELETE CASCADE,
-                    FOREIGN KEY (rid) REFERENCES Releases(rid) ON DELETE CASCADE
+                    FOREIGN KEY (uid) REFERENCES viewers(uid) ON DELETE CASCADE,
+                    FOREIGN KEY (rid) REFERENCES releases(rid) ON DELETE CASCADE
                 );
             """
     }
@@ -112,7 +112,7 @@ def create_tables():
     for table, query in create_table_queries.items():
         try:
             cursor.execute(query)
-            print(f"Created table: {table}")
+            #print(f"Created table: {table}")
         except mysql.connector.Error as err:
             print(f"Error creating table {table}: {err}")
 
@@ -120,9 +120,7 @@ def create_tables():
     conn.commit()
     cursor.close()
     conn.close()
-print("All tables created")
+    #print("All tables created")
 
-if __name__ == "__main__":
-    create_tables()
 
 
