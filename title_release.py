@@ -5,17 +5,19 @@ def title_release(sid:int):
     conn = db_connection()
     cursor = conn.cursor()
 
-    query = f"""
-    SELECT Releases.rid, Releases.title AS release_title, Releases.genre, Videos.title AS video_title, Videos.ep_num, Videos.length
-    FROM Sessions
-    JOIN Videos ON Sessions.rid = Videos.rid AND Sessions.ep_num = Videos.ep_num
-    JOIN Releases ON Videos.rid = Releases.rid
-    WHERE Sessions.sid = {sid}
-    ORDER BY Releases.title ASC;
+    cursor.execute("USE cs122a;")
+
+    query = """
+    SELECT releases.rid, releases.title AS release_title, releases.genre, videos.title AS video_title, videos.ep_num, videos.length
+    FROM sessions
+    JOIN videos ON sessions.rid = videos.rid AND sessions.ep_num = videos.ep_num
+    JOIN releases ON videos.rid = releases.rid
+    WHERE sessions.sid = %s
+    ORDER BY releases.title ASC;
     """
 
     try:
-        cursor.execute(query)
+        cursor.execute(query, (sid,))
     except mysql.connector.Error as err:
         print(err)
 

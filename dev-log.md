@@ -22,5 +22,6 @@ Removed print statements to pass the test cases.
 Implemented the first search query for get_releases. 
 
 3/17/2025
-Added search queries
-Finishing up implementation
+Added search queries.
+Finishing up implementation.
+Finished search queries except videos_viewed.

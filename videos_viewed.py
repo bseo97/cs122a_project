@@ -5,13 +5,16 @@ def videos_viewed(rid:int):
     conn = db_connection()
     cursor = conn.cursor()
 
+
+    cursor.execute("USE cs122a;")
+
     query = f"""
-    SELECT Videos.rid, Videos.ep_num, Videos.title, Videos.length, COUNT(DISTINCT Sessions.uid) AS view_count
-    FROM Videos
-    LEFT JOIN Sessions ON Videos.rid = Sessions.rid AND Videos.ep_num = Sessions.ep_num
-    WHERE Videos.rid = {rid}
-    GROUP BY Videos.rid, Videos.ep_num, Videos.title, Videos.length
-    ORDER BY Videos.rid DESC;
+    SELECT videos.rid, videos.ep_num, videos.title, videos.length, COUNT(DISTINCT sessions.uid) AS view_count
+    FROM videos
+    LEFT JOIN sessions ON videos.rid = sessions.rid AND videos.ep_num = sessions.ep_num
+    WHERE videos.rid = {rid}
+    GROUP BY videos.rid, videos.ep_num, videos.title, videos.length
+    ORDER BY videos.rid DESC;
     """
 
     try:

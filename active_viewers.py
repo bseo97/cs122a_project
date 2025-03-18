@@ -6,14 +6,16 @@ def active_viewers(N:int, start:datetime.date, end:datetime.date):
     conn = db_connection()
     cursor = conn.cursor()
 
+    cursor.execute("USE cs122a;")
+
     query = f"""
-    SELECT Viewers.uid, Viewers.first, Viewers.last
-    FROM Sessions
-    JOIN Viewers ON Sessions.uid = Viewers.uid
-    WHERE Sessions.initiate_at BETWEEN '{start}' AND '{end}'
-    GROUP BY Viewers.uid, Viewers.first, Viewers.last
-    HAVING COUNT(Sessions.sid) >= {N}
-    ORDER BY Viewers.uid ASC;
+    SELECT viewers.uid, viewers.first_name, viewers.last_name
+    FROM sessions
+    JOIN viewers ON sessions.uid = viewers.uid
+    WHERE sessions.initiate_at BETWEEN %s AND %s
+    GROUP BY viewers.uid, viewers.first_name, viewers.last_name
+    HAVING COUNT(sessions.sid) >= %s
+    ORDER BY viewers.uid ASC;
     """
 
     try:

@@ -6,6 +6,7 @@ def create_tables():
     conn = db_connection()  # Use the imported function
     cursor = conn.cursor()
 
+    cursor.execute("CREATE DATABASE IF NOT EXISTS cs122a;")
     cursor.execute("USE cs122a;")   # Assumed that we already have cs122a database
 
     create_table_queries = {

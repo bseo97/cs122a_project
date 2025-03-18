@@ -55,29 +55,30 @@ if __name__ == "__main__":
             print("Fail")
     elif sys.argv[1] == "listReleases" and len(sys.argv) == 3:
         #Can change for a better way to join tuples if you want
-        for values in get_releases[sys.argv[2]]:
-            #Join the tuple into a string to print. Use format rid,genre,title
-            printString = ""
-            for value in values:
-                printString += (str(value) + ",")
-            #Splice the string so that the last comma is not included
-            print(printString[:len(printString) - 1])
+        create_tables()
+        results = get_releases(int(sys.argv[2]))
+        for values in results:
+            print(",".join(map(str, values)))
     elif sys.argv[1] == "popularRelease" and len(sys.argv) == 3:
+        create_tables()
         results = popular_release(int(sys.argv[2]))
         for values in results:
             print(",".join(map(str, values)))  # Output in CSV format
 
     elif sys.argv[1] == "releaseTitle" and len(sys.argv) == 3:
+        create_tables()
         results = title_release(int(sys.argv[2]))
         for values in results:
             print(",".join(map(str, values)))  # Output in CSV format
 
     elif sys.argv[1] == "activeViewer" and len(sys.argv) == 5:
+        create_tables()
         results = active_viewers(int(sys.argv[2]), sys.argv[3], sys.argv[4])
         for values in results:
             print(",".join(map(str, values)))  # Output in CSV format
 
     elif sys.argv[1] == "videosViewed" and len(sys.argv) == 3:
+        create_tables()
         results = videos_viewed(int(sys.argv[2]))
         for values in results:
             print(",".join(map(str, values)))  # Output in CSV format
