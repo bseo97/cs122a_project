@@ -80,8 +80,12 @@ if __name__ == "__main__":
     elif sys.argv[1] == "videosViewed" and len(sys.argv) == 3:
         create_tables()
         results = videos_viewed(int(sys.argv[2]))
-        for values in results:
-            print(",".join(map(str, values)))  # Output in CSV format
+
+        videos_list = results[0]
+        count = results[1]
+        for vids in videos_list:
+            video_attributes = ','.join(map(str, vids))
+            print(f"{video_attributes},{count}")
 
     else:
          print("Invalid Input")

@@ -8,7 +8,11 @@ def get_releases(uid:int):
     cursor.execute("USE cs122a;")
 
     #Get rid,genre,title from the natural joined table of reviews,viewers,releases where uid is equal to the passed in uid. Order it by ascending order based on title
-    query = f"""SELECT DISTINCT rid, genre, title FROM reviews NATURAL JOIN viewers NATURAL JOIN releases WHERE uid = {uid} ORDER BY title ASC"""
+    query = f"""SELECT DISTINCT rid, genre, title 
+                FROM reviews 
+                NATURAL JOIN viewers NATURAL JOIN releases 
+                WHERE uid = {uid} 
+                ORDER BY title ASC"""
 
     try:
         cursor.execute(query)
